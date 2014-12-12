@@ -4,6 +4,9 @@
 // поддержка модификаторов
 // findBlockInside(prefix + 'button')
 // поддержка технологий-папок
+// перейти на COA
+// поддержать внешние плагины
+// запилить тесты
 
 var fs = require('fs'),
     path = require('path'),
@@ -27,6 +30,7 @@ cliLevels.forEach(function(level) {
 
 walk(levels).on('data', function(entity) {
     entity.block === from && replace(entity, from, to);
+    from === '*' && replace(entity, entity.block, to.replace('*', entity.block));
 });
 
 function replace(entity, from, to) {
@@ -45,7 +49,7 @@ function replace(entity, from, to) {
         content = replaceContent(fs.readFileSync(entity.path, 'utf8'), from, to, entity.tech);
 
     fs.writeFileSync(entity.path.replace(regExp, to), content);
-    rm(entity.path);
+    rm(entity.path); // works like `cp` without this like
 }
 
 function replaceContent(content, from, to, tech) {
