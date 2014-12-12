@@ -4,7 +4,6 @@
 // поддержка модификаторов
 // findBlockInside(prefix + 'button')
 // поддержка технологий-папок
-// поддержать вайлдкарды для уровней glob
 
 var fs = require('fs'),
     path = require('path'),
@@ -12,6 +11,7 @@ var fs = require('fs'),
     naming = require('bem-naming')(),
     mkdirp = require('mkdirp'),
     glob = require('glob'),
+    rm = require('rimraf').sync,
     techs = require('./techs'),
     args = process.argv,
     from = args[2],
@@ -45,6 +45,7 @@ function replace(entity, from, to) {
         content = replaceContent(fs.readFileSync(entity.path, 'utf8'), from, to, entity.tech);
 
     fs.writeFileSync(entity.path.replace(regExp, to), content);
+    rm(entity.path);
 }
 
 function replaceContent(content, from, to, tech) {
