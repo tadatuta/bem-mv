@@ -26,7 +26,9 @@
   },
   "bin": {
     "bemmv": "./index.js",
-    "bemcp": "./index.js"
+    "bemcp": "./index.js",
+    "bemls": "./ls.js",
+    "bemfind": "./find.js"
   },
   "dependencies": {
     "bem-naming": "^0.4.0",

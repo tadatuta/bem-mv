@@ -1,9 +1,14 @@
 bem-mv
 ======
 
-Renames BEM blocks with some intelligence.
+**Important!** The name of the package will be changed soon.
 
-The package provides two commands: `bemcp` and `bemmv`. The only difference is that `bemmv` removes source block.
+`bemls` lists all BEM entities on the given levels (`['*.blocks', '**/*.blocks']` by default).
+
+`bemfind` lists all BEM entities filtered by class name. E.g. `bemfind input__control`.
+
+`bemmv` and `bemcp` rename BEM blocks with some intelligence.
+The only difference is that `bemmv` removes source block.
 
 ## Usage:
 
