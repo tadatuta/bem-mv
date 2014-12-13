@@ -13,7 +13,9 @@
     "blocks",
     "tools",
     "rename",
-    "mv"
+    "mv",
+    "cp",
+    "copy"
   ],
   "repository": {
     "type": "git",
@@ -23,7 +25,8 @@
     "url": "https://github.com/tadatuta/bem-mv/issues"
   },
   "bin": {
-    "bemmv": "./index.js"
+    "bemmv": "./index.js",
+    "bemcp": "./index.js"
   },
   "dependencies": {
     "bem-naming": "^0.4.0",

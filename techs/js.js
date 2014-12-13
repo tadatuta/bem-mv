@@ -12,6 +12,7 @@ module.exports = function(content, from, to) {
     content = content.replace(regExp, 'BEM$1.$2decl(\'' + to + '\')');
 
     // modules
+    // TODO: support modules.require
     var regExp = new RegExp('modules\.define\\(\'' + from, 'g');
     return content.replace(regExp, 'modules.define(\'' + to);
 }

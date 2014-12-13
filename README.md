@@ -3,7 +3,14 @@ bem-mv
 
 Renames BEM blocks with some intelligence.
 
+The package provides two commands: `bemcp` and `bemmv`. The only difference is that `bemmv` removes source block.
+
 ## Usage:
+
+### Make a copy of b1 as b2 on `*.blocks` level:
+```bash
+bemcp b1 b2
+```
 
 ### Replace b1 with b2 on `*.blocks` level:
 ```bash

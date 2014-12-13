@@ -1,12 +1,4 @@
-// TODO:
-// поддержка уровней
-// поддержка элементов
-// поддержка модификаторов
-// findBlockInside(prefix + 'button')
-// поддержка технологий-папок
-// перейти на COA
-// поддержать внешние плагины
-// запилить тесты
+#!/usr/bin/env node
 
 var fs = require('fs'),
     path = require('path'),
@@ -17,12 +9,21 @@ var fs = require('fs'),
     rm = require('rimraf').sync,
     techs = require('./techs'),
     args = process.argv,
+    binName = args[1].split('/').pop(),
     from = args[2],
     to = args[3],
     cliLevels = args[4] && args[4].split(',') || ['*.blocks'],
     levels = [];
 
 // console.log('from', from, 'to', to);
+
+if (args.length < 4) {
+    console.log('USAGE: ' + binName + ' `from` `to` `levels` (*.blocks by default)');
+    console.log('Examples:');
+    console.log(binName + ' b1 b2');
+    console.log(binName + ' b1 b2 common.blocks,desktop.blocks');
+    console.log(binName + ' \'*\' \'b-*\' \'libs/**/*.blocks\'');
+}
 
 cliLevels.forEach(function(level) {
     levels = levels.concat(glob.sync(level));
@@ -49,7 +50,7 @@ function replace(entity, from, to) {
         content = replaceContent(fs.readFileSync(entity.path, 'utf8'), from, to, entity.tech);
 
     fs.writeFileSync(entity.path.replace(regExp, to), content);
-    rm(entity.path); // works like `cp` without this like
+    binName === 'bemmv' && rm(entity.path);
 }
 
 function replaceContent(content, from, to, tech) {
