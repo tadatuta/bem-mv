@@ -29,28 +29,29 @@ cliLevels.forEach(function(level) {
     levels = levels.concat(glob.sync(level));
 });
 
-walk(levels).on('data', function(entity) {
-    entity.block === from && replace(entity, from, to);
-    from === '*' && replace(entity, entity.block, to.replace('*', entity.block));
+walk(levels).on('data', function(item) {
+    // console.log('en', entity);
+    item.entity.block === from && replace(item, from, to);
+    from === '*' && replace(item, item.entity.block, to.replace('*', item.entity.block));
 });
 
-function replace(entity, from, to) {
+function replace(item, from, to) {
     // TODO: check if `to` exists
-    mkdirp.sync(path.join(entity.level, to));
+    mkdirp.sync(path.join(item.level, to));
 
-    entity.elem && mkdirp.sync(path.join(entity.level, to, naming._elemDelimiter + entity.elem));
-    entity.modName && mkdirp.sync(path.join(entity.level, to, naming._modDelimiter + entity.modName));
+    item.entity.elem && mkdirp.sync(path.join(item.level, to, naming._elemDelimiter + item.entity.elem));
+    item.entity.modName && mkdirp.sync(path.join(item.level, to, naming._modDelimiter + item.entity.modName));
 
-    if(fs.lstatSync(entity.path).isDirectory()) {
+    if(fs.lstatSync(item.path).isDirectory()) {
         // TODO
         return;
     }
 
     var regExp = new RegExp(from, 'g'),
-        content = replaceContent(fs.readFileSync(entity.path, 'utf8'), from, to, entity.tech);
+        content = replaceContent(fs.readFileSync(item.path, 'utf8'), from, to, item.tech);
 
-    fs.writeFileSync(entity.path.replace(regExp, to), content);
-    binName === 'bemmv' && rm(entity.path);
+    fs.writeFileSync(item.path.replace(regExp, to), content);
+    binName === 'bemmv' && rm(item.path);
 }
 
 function replaceContent(content, from, to, tech) {

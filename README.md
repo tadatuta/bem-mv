@@ -1,11 +1,5 @@
-bem-mv
-======
-
-**Important!** The name of the package will be changed soon.
-
-`bemls` lists all BEM entities on the given levels (`['*.blocks', '**/*.blocks']` by default).
-
-`bemfind` lists all BEM entities filtered by class name. E.g. `bemfind input__control`.
+bem-tools-mv
+============
 
 `bemmv` and `bemcp` rename BEM blocks with some intelligence.
 The only difference is that `bemmv` removes source block.
